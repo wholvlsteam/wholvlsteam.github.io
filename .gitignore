@@ -1,0 +1,15 @@
+# Hexo 生成的静态站点(由 hexo g 产出,不入库)
+public/
+.deploy_git/
+
+# Hexo 缓存数据库(会自动重建)
+db.json
+
+# 依赖目录(体积大,由 npm install 还原)
+node_modules/
+
+# 日志与系统文件
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
