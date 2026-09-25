@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="历史坐标 印章标记">
+  <!-- 原创印章标记:一根时间轴 + 三条长度递进的条目,对应清单的三档掌握程度 -->
+  <circle cx="60" cy="60" r="60" fill="#f4efe4"/>
+  <circle cx="60" cy="60" r="56" fill="none" stroke="#9c3d2e" stroke-width="2.5"/>
+  <rect x="38" y="37.5" width="26" height="9" rx="4.5" fill="#c98f5a"/>
+  <rect x="38" y="55.5" width="42" height="9" rx="4.5" fill="#a05a2c"/>
+  <rect x="38" y="73.5" width="58" height="9" rx="4.5" fill="#7a2e1f"/>
+  <line x1="40" y1="27" x2="40" y2="93" stroke="#2b241a" stroke-width="4" stroke-linecap="round"/>
+</svg>

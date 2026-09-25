@@ -18,10 +18,12 @@ nav:
   fixed: false
 
 menu:
-  # Home: / || fas fa-home
-  # List||fas fa-list:
-  #   Music: /music/ || fas fa-music
-  #   Movie: /movies/ || fas fa-video
+  首页: / || fas fa-home
+  打卡清单: /history/ || fas fa-list-check
+  地图收藏: /maps/ || fas fa-map
+  资源书架: /library/ || fas fa-book
+  旅行足迹: /travel/ || fas fa-location-dot
+  文章: /posts/ || fas fa-pen-nib
 
 # --------------------------------------
 # Code Blocks Settings
@@ -46,17 +48,17 @@ code_blocks:
 # Formal:
 #   icon: link || the description || color
 social:
-  # fab fa-github: https://github.com/xxxxx || Github || '#24292e'
-  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email || '#4a7dbe'
+  fab fa-github: https://github.com/wholvlsteam || Github || '#24292e'
+  fas fa-envelope: mailto:wholvl@qq.com || Email || '#4a7dbe'
 
 # --------------------------------------
 # Image Settings
 # --------------------------------------
 
-favicon: /img/favicon.png
+favicon: /img/history/seal.svg
 
 avatar:
-  img: /img/butterfly-icon.png
+  img: /img/history/seal.svg
   effect: false
 
 # Disable all banner images
@@ -288,11 +290,11 @@ aside:
     button:
       enable: true
       icon: fab fa-github
-      text: Follow Me
-      link: https://github.com/xxxxxx
+      text: 我的 GitHub
+      link: https://github.com/wholvlsteam
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: 一个人的历史坐标。<br>打卡清单 / 地图收藏 / 书单 / 旅行足迹。
   card_recent_post:
     enable: true
     # If set 0 will show all
@@ -438,10 +440,13 @@ wordcount:
   total_wordcount: true
 
 # Busuanzi count for PV / UV in site
+# 已关闭:busuanzi 按域名计数,本地预览时 localhost 是所有开发者共用的桶,
+# 显示的是几千万的全局数字,不是本站数据。等部署到 wholvlsteam.github.io
+# 之后想显示真实访问量,把下面三项改回 true 即可(届时会从 1 开始)。
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # --------------------------------------
 # Math
@@ -1057,7 +1062,7 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
-    # - <link rel="stylesheet" href="/xxx.css">
+    - <link rel="stylesheet" href="/css/history.css">
   bottom:
     # - <script src="xxxx"></script>
 

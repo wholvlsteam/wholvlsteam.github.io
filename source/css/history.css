@@ -1,0 +1,644 @@
+/* ==========================================================================
+   历史主题个人主页 · 自定义样式
+   --------------------------------------------------------------------------
+   配色说明(全部经脚本验证,非目测):
+   · 三档状态 = 有序等级(ordinal),单色阶 浅→深,实测色相跨度 29°
+     亮色端 #c98f5a 对羊皮纸底 2.60:1(过 ordinal 2:1 底线)
+     暗色端 #8f6a48 对墨底 3.68:1
+   · 正文/次级/弱化文字对比度均 >= 4.5:1(WCAG AA)
+     亮色:14.33 / 7.06 / 4.58   暗色:15.73 / 9.13 / 5.62
+   · 状态一律「图形 + 文字」双通道,不靠颜色单独表意
+   所有规则都限制在 .hist 作用域内,不会污染主题样式。
+   ========================================================================== */
+
+.hist {
+  /* ---- 亮色 · 羊皮纸 ---- */
+  --paper:      #f4efe4;   /* 页面底 */
+  --surface:    #faf7f0;   /* 卡片面 */
+  --surface-2:  #f0e9dc;   /* 次级面(表头等) */
+  --ink:        #2b241a;   /* 正文  14.33:1 */
+  --ink-2:      #5c5346;   /* 次级   7.06:1 */
+  --ink-3:      #78705f;   /* 弱化   4.58:1 */
+  --rule:       #e3ddd0;   /* 分隔线 */
+  --accent:     #9c3d2e;   /* 朱砂强调 6.29:1 */
+
+  /* 有序色阶:待了解 → 简单了解 → 深度了解 */
+  --lv0:        #c98f5a;
+  --lv1:        #a05a2c;
+  --lv2:        #7a2e1f;
+  --track:      #ece4d6;   /* 进度条轨道 */
+
+  --radius:     10px;
+  --shadow:     0 1px 2px rgba(43, 36, 26, .06), 0 4px 14px rgba(43, 36, 26, .05);
+
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, serif;
+  --font-sans:  system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+html[data-theme="dark"] .hist {
+  /* ---- 暗色 · 墨 ---- */
+  --paper:      #12100d;
+  --surface:    #1a1712;
+  --surface-2:  #221e18;
+  --ink:        #f5f0e6;   /* 15.73:1 */
+  --ink-2:      #c3b8a6;   /*  9.13:1 */
+  --ink-3:      #9a8f7d;   /*  5.62:1 */
+  --rule:       #302b23;
+  --accent:     #e08a6f;   /*  6.84:1 */
+
+  --lv0:        #8f6a48;
+  --lv1:        #c48f57;
+  --lv2:        #e8bb8a;
+  --track:      #2a251e;
+
+  --shadow:     0 1px 2px rgba(0, 0, 0, .4), 0 4px 14px rgba(0, 0, 0, .3);
+}
+
+/* 这些页面自带页头标题,隐藏主题渲染的 .page-title 以免重复 */
+#page:has(.hist) .page-title { display: none; }
+
+/* 主题容器对子元素有默认间距,这里统一接管 */
+.hist, .hist * { box-sizing: border-box; }
+.hist { color: var(--ink); font-family: var(--font-sans); line-height: 1.75; }
+.hist p, .hist ul, .hist ol { margin: 0 0 .85em; }
+.hist a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.hist a:hover { border-bottom-color: var(--accent); }
+
+/* ---------- 页头 ---------- */
+.hist-hero {
+  margin: 0 0 2rem;
+  padding: 2.2rem 1.8rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  background-image:
+    repeating-linear-gradient(135deg, transparent 0 18px, rgba(156, 61, 46, .035) 18px 19px);
+  text-align: center;
+}
+.hist-hero h1 {
+  margin: 0 0 .5rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4.2vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--ink);
+}
+.hist-hero .sub {
+  margin: 0;
+  font-size: .95rem;
+  color: var(--ink-2);
+  letter-spacing: .04em;
+}
+.hist-hero .ornament {
+  display: block;
+  margin: 0 auto 1rem;
+  width: 132px;
+  height: 14px;
+  color: var(--accent);
+  opacity: .55;
+}
+
+/* ---------- 统计区:数字牌 + 进度条 ---------- */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: .9rem;
+  margin: 0 0 1.4rem;
+  list-style: none;
+  padding: 0;
+}
+.stat-row li {
+  margin: 0;
+  padding: 1rem .9rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+.stat-num {
+  display: block;
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.stat-num.is-accent { color: var(--accent); }
+.stat-label {
+  display: block;
+  margin-top: .25rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  color: var(--ink-3);
+}
+
+/* 进度条:细轨,数据端 4px 圆角 */
+.meter-wrap { margin: 0 0 1.6rem; }
+.meter {
+  height: 8px;
+  background: var(--track);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.meter > i {
+  display: block;
+  height: 100%;
+  background: var(--lv2);
+  border-radius: 0 4px 4px 0;
+}
+.meter-cap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .4rem;
+  font-size: .74rem;
+  color: var(--ink-3);
+}
+
+/* ---------- 图例:图形 + 文字,颜色只是辅助 ---------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.4rem;
+  margin: 0 0 1.8rem;
+  padding: .8rem 1rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  list-style: none;
+  font-size: .82rem;
+}
+.legend li { margin: 0; display: flex; align-items: center; gap: .45rem; color: var(--ink-2); }
+.legend .glyph { font-size: 1rem; line-height: 1; }
+
+/* 状态徽标:形状 + 文字双通道 */
+.glyph { font-family: var(--font-sans); }
+.g-lv0 { color: var(--lv0); }
+.g-lv1 { color: var(--lv1); }
+.g-lv2 { color: var(--lv2); }
+
+/* ---------- 时代分组 ---------- */
+.era { margin: 0 0 1.6rem; }
+.era-head {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin: 0 0 .7rem;
+  padding-bottom: .45rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: var(--ink);
+}
+.era-head .era-tag {
+  font-family: var(--font-sans);
+  font-size: .7rem;
+  font-weight: 400;
+  letter-spacing: .1em;
+  color: var(--ink-3);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: .05rem .4rem;
+}
+.era-head .era-count {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: .74rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+/* 断代对应的《中国断代史系列》卷次 */
+.era-head:has(+ .era-books) { margin-bottom: .3rem; }
+.era-books {
+  margin: 0 0 .8rem;
+  font-size: .75rem;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+
+/* ---------- 清单 ---------- */
+.chk-list { list-style: none; padding: 0; margin: 0; }
+.chk-list > li { margin: 0 0 .4rem; }
+
+.chk {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  padding: .55rem .75rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--lv0);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.chk.is-lv1 { border-left-color: var(--lv1); }
+.chk.is-lv2 { border-left-color: var(--lv2); }
+/* 后面紧跟展开面板时,底角改成直角以衔接 */
+.chk:has(+ details.chk-detail) { border-radius: 6px 6px 0 0; }
+
+.chk .name { font-weight: 600; color: var(--ink); }
+.chk .note { font-size: .84rem; color: var(--ink-2); }
+.chk .badge {
+  margin-left: auto;
+  flex: none;
+  font-size: .74rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.chk.is-lv1 .badge { color: var(--lv1); }
+.chk.is-lv2 .badge { color: var(--lv2); }
+
+/* 可展开详情 */
+details.chk-detail {
+  margin: .25rem 0 .5rem;
+  border: 1px solid var(--rule);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  background: var(--surface-2);
+}
+details.chk-detail > summary {
+  cursor: pointer;
+  padding: .45rem .75rem;
+  font-size: .8rem;
+  color: var(--accent);
+  list-style: none;
+}
+details.chk-detail > summary::-webkit-details-marker { display: none; }
+details.chk-detail > summary::before { content: "▸ "; }
+details.chk-detail[open] > summary::before { content: "▾ "; }
+.detail-body {
+  padding: .2rem .95rem .85rem;
+  font-size: .86rem;
+  color: var(--ink-2);
+  border-top: 1px dashed var(--rule);
+}
+.detail-body dt { font-weight: 600; color: var(--ink); margin-top: .5rem; font-size: .8rem; }
+.detail-body dd { margin: .1rem 0 0; }
+.detail-body dl { margin: 0; }
+/* 展开面板里的书目列表 */
+.book-list { margin: .15rem 0 .1rem; padding: 0; list-style: none; }
+.book-list > li { position: relative; padding-left: .9rem; margin: .16rem 0; }
+.book-list > li::before {
+  content: "·";
+  position: absolute;
+  left: .2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.detail-body p { margin: .45rem 0 0; font-size: .78rem; color: var(--ink-3); }
+/* 书目里的出版信息:弱化一级 */
+.book-list .pub { margin-left: .5rem; font-size: .78rem; color: var(--ink-3); }
+
+/* ---------- 通用卡片 / 网格 ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+.card-grid > li { margin: 0; }
+/* 恰好 4 张卡片时固定两列:auto-fill 在常见宽度下会排成 3+1 */
+.card-grid.is-quad { grid-template-columns: repeat(2, 1fr); }
+.card {
+  display: block;
+  height: 100%;
+  padding: 1.05rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform .16s ease, border-color .16s ease;
+}
+a.card { border-bottom: none; }
+a.card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.card .card-kicker {
+  display: block;
+  font-size: .7rem;
+  letter-spacing: .14em;
+  color: var(--ink-3);
+  margin-bottom: .35rem;
+}
+.card h3 {
+  margin: 0 0 .35rem;
+  font-family: var(--font-serif);
+  font-size: 1.06rem;
+  color: var(--ink);
+}
+.card p { margin: 0; font-size: .85rem; color: var(--ink-2); }
+
+/* ---------- 图片 ---------- */
+.figure {
+  margin: 1.2rem 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.figure img { display: block; width: 100%; height: auto; border: none; border-radius: 0; }
+.figure figcaption {
+  padding: .6rem .9rem;
+  font-size: .78rem;
+  color: var(--ink-3);
+  border-top: 1px solid var(--rule);
+  background: var(--surface-2);
+}
+.figure figcaption b { color: var(--ink-2); font-weight: 600; }
+
+/* ---------- 表格 ---------- */
+.hist table {
+  width: 100%;
+  margin: 0 0 1.4rem;
+  border-collapse: collapse;
+  font-size: .86rem;
+  background: var(--surface);
+}
+.hist table th, .hist table td {
+  padding: .55rem .7rem;
+  border: 1px solid var(--rule);
+  text-align: left;
+  color: var(--ink-2);
+}
+.hist table th {
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.hist table td:first-child { color: var(--ink); font-weight: 600; }
+
+/* ---------- 地图与足迹标记 ---------- */
+.map-wrap {
+  position: relative;
+  margin: 1.2rem 0 .6rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.map-wrap img { display: block; width: 100%; height: auto; border: none; border-radius: 0; }
+.marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  border: 2px solid var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+html[data-theme="dark"] .marker { color: #1a1712; }
+.foot-list { list-style: none; padding: 0; margin: 0 0 1.6rem; }
+.foot-list li {
+  display: flex;
+  gap: .6rem;
+  align-items: baseline;
+  margin: 0 0 .35rem;
+  font-size: .86rem;
+  color: var(--ink-2);
+}
+.foot-list .idx {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: .66rem;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  align-self: center;
+}
+html[data-theme="dark"] .foot-list .idx { color: #1a1712; }
+.foot-list b { color: var(--ink); }
+
+/* ---------- 提示块 ---------- */
+.note {
+  margin: 0 0 1.4rem;
+  padding: .8rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 6px 6px 0;
+  font-size: .85rem;
+  color: var(--ink-2);
+}
+.note b { color: var(--ink); }
+
+/* ---------- 小节标题 ---------- */
+.hist h2 {
+  margin: 2rem 0 .9rem;
+  padding-left: .6rem;
+  border-left: 4px solid var(--accent);
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.hist h2:first-child { margin-top: 0; }
+
+/* ---------- 小节标题(第三级,书架的主题分组) ---------- */
+.hist h3 {
+  margin: 1.4rem 0 .5rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.hist h3 .cnt {
+  margin-left: .5rem;
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+/* ---------- 主题一览(内容维度的图例) ---------- */
+.theme-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: .5rem;
+  margin: 0 0 1.8rem;
+  padding: 0;
+  list-style: none;
+}
+.theme-row li {
+  margin: 0;
+  padding: .5rem .7rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: .8rem;
+  color: var(--ink-2);
+}
+.theme-row b { color: var(--ink); font-weight: 600; }
+.theme-row .n { float: right; font-size: .74rem; color: var(--ink-3); }
+
+/* 论文(相对专著)的轻标记 */
+.kind {
+  margin-left: .4rem;
+  padding: 0 .3rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font-size: .66rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* 断代区块之间的间隔 */
+.hist .era + .era { margin-top: 2.2rem; }
+.hist .era > p:first-of-type { margin-bottom: .6rem; }
+
+/* ---------- 断代折叠块(书架用,书目多时每段收起) ---------- */
+details.era-box {
+  margin: 0 0 .7rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+details.era-box > summary {
+  cursor: pointer;
+  padding: .7rem .95rem;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--ink);
+  list-style: none;
+}
+details.era-box > summary::-webkit-details-marker { display: none; }
+details.era-box > summary::before {
+  content: "▸";
+  margin-right: .5rem;
+  font-weight: 400;
+  color: var(--accent);
+}
+details.era-box[open] > summary::before { content: "▾"; }
+details.era-box[open] > summary { border-bottom: 1px solid var(--rule); }
+details.era-box > summary .cnt {
+  margin-left: .55rem;
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+details.era-box > summary .era-tag {
+  margin-left: .5rem;
+  font-family: var(--font-sans);
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: var(--ink-3);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: .02rem .35rem;
+}
+.era-inner { padding: .35rem .95rem .8rem; }
+.era-inner .hist h3, .era-inner h3 { margin-top: .9rem; }
+
+/* ---------- 地图画廊(公有领域古地图) ---------- */
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+.map-grid > li { margin: 0; }
+.map-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.map-card a.pic {
+  display: block;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--rule);
+}
+.map-card a.pic img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+}
+.map-card .cap { flex: 1; padding: .6rem .8rem .7rem; }
+.map-card .cap b {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: .93rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.map-card .cap .era {
+  display: block;
+  margin: .12rem 0 .4rem;
+  font-size: .71rem;
+  letter-spacing: .02em;
+  color: var(--ink-3);
+}
+.map-card .cap p {
+  margin: 0 0 .5rem;
+  font-size: .78rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.map-card .cap .src {
+  display: block;
+  padding-top: .4rem;
+  border-top: 1px dashed var(--rule);
+  font-size: .69rem;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+.map-card .cap .src em { font-style: normal; color: var(--accent); }
+
+/* 分幅清单:紧凑多列,只列名 */
+.sheet-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: .15rem .9rem;
+  margin: 0 0 1.2rem;
+  padding: 0;
+  list-style: none;
+  font-size: .84rem;
+  color: var(--ink-2);
+}
+.sheet-list li { margin: 0; }
+.sheet-list li::before { content: "·"; margin-right: .4rem; color: var(--accent); }
+
+/* ---------- 待补充占位 ---------- */
+.todo {
+  display: inline-block;
+  padding: 0 .35rem;
+  border: 1px dashed var(--accent);
+  border-radius: 3px;
+  font-size: .74rem;
+  color: var(--accent);
+  opacity: .8;
+}
+
+/* ---------- 移动端 ---------- */
+@media (max-width: 640px) {
+  .hist-hero { padding: 1.5rem 1rem; }
+  .chk { flex-wrap: wrap; gap: .3rem .55rem; }
+  .chk .badge { margin-left: 0; width: 100%; }
+  .card-grid, .card-grid.is-quad { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .era-books { font-size: .7rem; }
+  .hist table { font-size: .78rem; }
+  .hist table th, .hist table td { padding: .4rem .45rem; }
+}

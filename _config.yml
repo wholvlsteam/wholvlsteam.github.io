@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+title: wholvlhistory
+subtitle: '一个人的历史坐标'
+description: '历史阅读笔记 —— 打卡清单、地图收藏、书单与旅行足迹'
+keywords: 历史,中国史,世界史,读史笔记
+author: wholvlsteam
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://wholvlsteam.github.io
+url: https://wholvlsteam.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -60,7 +60,7 @@ prismjs:
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: 'posts'
   per_page: 10
   order_by: -date
 
