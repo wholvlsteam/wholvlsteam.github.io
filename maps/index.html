@@ -1,0 +1,487 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>历史地图收藏 | wholvlhistory</title><meta name="author" content="wholvlsteam"><meta name="copyright" content="wholvlsteam"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="历史地图收藏   公有领域古地图 · 附来源与授权   地图是我读史时最依赖的工具。同一片土地在不同朝代的位置、名称、边界都不一样，光看文字很难建立空间感。这一页放两样东西：我自己在用的图集清单，和一批已进入公有领域的古地图——后者可以直接打开看大图。     先说清楚版权。我手上数量最大的一批地图，是《中国历史地图集》（谭其骧主编，中国地图出版社）的扫描件。这部图集仍在版权期内，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="历史地图收藏">
+<meta property="og:url" content="https://wholvlsteam.github.io/maps/index.html">
+<meta property="og:site_name" content="wholvlhistory">
+<meta property="og:description" content="历史地图收藏   公有领域古地图 · 附来源与授权   地图是我读史时最依赖的工具。同一片土地在不同朝代的位置、名称、边界都不一样，光看文字很难建立空间感。这一页放两样东西：我自己在用的图集清单，和一批已进入公有领域的古地图——后者可以直接打开看大图。     先说清楚版权。我手上数量最大的一批地图，是《中国历史地图集》（谭其骧主编，中国地图出版社）的扫描件。这部图集仍在版权期内，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wholvlsteam.github.io/img/history/seal.svg">
+<meta property="article:published_time" content="2026-09-25T06:20:00.000Z">
+<meta property="article:modified_time" content="2026-09-25T08:51:42.349Z">
+<meta property="article:author" content="wholvlsteam">
+<meta property="article:tag" content="历史,中国史,世界史,读史笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wholvlsteam.github.io/img/history/seal.svg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/history/seal.svg"><link rel="canonical" href="https://wholvlsteam.github.io/maps/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '历史地图收藏',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="/css/history.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/history/seal.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/history/"><i class="fa-fw fas fa-list-check"></i><span> 打卡清单</span></a></div><div class="menus_item"><a class="site-page" href="/maps/"><i class="fa-fw fas fa-map"></i><span> 地图收藏</span></a></div><div class="menus_item"><a class="site-page" href="/library/"><i class="fa-fw fas fa-book"></i><span> 资源书架</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-location-dot"></i><span> 旅行足迹</span></a></div><div class="menus_item"><a class="site-page" href="/posts/"><i class="fa-fw fas fa-pen-nib"></i><span> 文章</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">wholvlhistory</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/history/"><i class="fa-fw fas fa-list-check"></i><span> 打卡清单</span></a></div><div class="menus_item"><a class="site-page" href="/maps/"><i class="fa-fw fas fa-map"></i><span> 地图收藏</span></a></div><div class="menus_item"><a class="site-page" href="/library/"><i class="fa-fw fas fa-book"></i><span> 资源书架</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-location-dot"></i><span> 旅行足迹</span></a></div><div class="menus_item"><a class="site-page" href="/posts/"><i class="fa-fw fas fa-pen-nib"></i><span> 文章</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">历史地图收藏</h1></header><main class="layout" id="content-inner"><div id="page"><div class="page-title">历史地图收藏</div><div class="container" id="article-container"><div class="hist">
+
+<div class="hist-hero">
+  <img class="ornament" src="/img/history/ornament.svg" alt="">
+  <h1>历史地图收藏</h1>
+  <p class="sub">公有领域古地图 · 附来源与授权</p>
+</div>
+
+<p>地图是我读史时最依赖的工具。同一片土地在不同朝代的位置、名称、边界都不一样，光看文字很难建立空间感。这一页放两样东西：我自己在用的图集清单，和一批<b>已进入公有领域</b>的古地图——后者可以直接打开看大图。</p>
+
+<div class="note">
+  <b>先说清楚版权。</b>我手上数量最大的一批地图，是《中国历史地图集》（谭其骧主编，中国地图出版社）的扫描件。这部图集<b>仍在版权期内</b>，扫描上传就是侵权，所以我不会把文件放到站上，只在下文列一下我用的是哪些分幅。下面画廊里的每一张都标注了来源和授权，全部是公有领域。
+</div>
+
+<h2>收藏 · 公有领域古地图</h2>
+
+<p>十张，从南宋刻石到 1869 年的统计图。点图可以看大图。</p>
+
+<ul class="map-grid">
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/yuji-tu.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/yuji-tu.jpg" alt="禹迹图，石刻拓本，1137 年" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>禹迹图</b>
+        <span class="era">1137 年刻石 · 西安碑林</span>
+        <p>现存最重要的石刻中国总图之一。图上「计里画方」的方格网还清楚可辨——每方折地百里，是中国传统制图法的核心。水系画得比海岸线准确得多，黄河、长江的河道走势尤其细。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Yu-ji-tu-map.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/daming-hunyi-tu.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/daming-hunyi-tu.jpg" alt="大明混一图，绢本，1389 年" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>大明混一图</b>
+        <span class="era">1389 年 · 绢本设色</span>
+        <p>现存最早的明初世界图。反映的是 1389 年的政治形势，但绘制年代可能晚得多；图上原来的汉文标签后来被满文纸条覆盖过，是清入关后改用的痕迹。非洲大陆的轮廓画得相当靠前。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Da-ming-hun-yi-tu.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/guangyutu-1558-shanxi.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/guangyutu-1558-shanxi.jpg" alt="广舆图山西幅，1558 年胡松修订本" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>广舆图 · 山西幅</b>
+        <span class="era">1558 年胡松修订本 · 美国国会图书馆藏</span>
+        <p>朱思本原绘、罗洪先增订、胡松编。中国第一部综合性地图集，明清两代的舆图基本都从它派生。这一幅是山西，注意图上的方格网和禹迹图是同一套方法。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Guang_Yutu_1558_Vol_1_Pg_18_Shanxi_4.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/guangyutu-1558-fujian.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/guangyutu-1558-fujian.jpg" alt="广舆图福建幅，1558 年胡松修订本" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>广舆图 · 福建幅</b>
+        <span class="era">1558 年胡松修订本 · 美国国会图书馆藏</span>
+        <p>与山西幅同出一册。福建靠海，这一幅能看出明代舆图对海岸线和岛屿的处理方式——近海岛屿密、远海留白，沿海卫所的位置标得很细。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Guang_Yutu_1558_Vol_1_Pg_45_Fujian_2.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/guangyutu-1588-siyi.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/guangyutu-1588-siyi.jpg" alt="广舆图四夷幅，1588 年" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>广舆图 · 四夷幅</b>
+        <span class="era">1588 年 · 第二卷</span>
+        <p>《广舆图》第二卷专收域外，这一幅是四夷总图。把「四夷」单独成卷，本身就是一种天下观的表达：内诸夏而外夷狄，地理书里也照这个结构排。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Guang_Yutu_1588_Vol_2_Pg_116_Barbarians_3.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/guangyutu-1558-cover.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/guangyutu-1558-cover.jpg" alt="广舆图1558年第一卷封面" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>广舆图 · 封面</b>
+        <span class="era">1558 年 · 第一卷</span>
+        <p>第一卷封面。首字有残损，所以看着不太完整。放在这里是为了让人看到明代地图集的实物形态——刻本、线装、分幅装订。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Guang_Yutu_1558_Vol_1_Cover.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/kunyu-wanguo-quantu.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/kunyu-wanguo-quantu.jpg" alt="坤舆万国全图，利玛窦，1602 年" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>坤舆万国全图</b>
+        <span class="era">1602 年 · 利玛窦与李之藻</span>
+        <p>六幅屏条拼成的中文世界图，五大洲、经纬网、赤道都画进去了。中国被放在图幅中央——这不是当时欧洲地图的画法，是为了迁就明人的天下观有意做的调整。想看明末西学传入，这张图比任何文字都直观。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Kunyu_Wanguo_Quantu_(%E5%9D%A4%E8%BC%BF%E8%90%AC%E5%9C%8B%E5%85%A8%E5%9C%96).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/selden-map.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/selden-map.jpg" alt="雪尔登中国地图，约 1620 年" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>雪尔登中国地图</b>
+        <span class="era">约 1620 年 · 牛津大学博德利图书馆藏</span>
+        <p>一幅民间海商用的航海图，画的是从泉州出发的航线网，东到日本、南抵印尼。它和官方天下图是两套完全不同的东西——没有方格网、不按比例，但标出了实际跑船走的每一段针路。1659 年随法学家 John Selden 的遗赠入藏博德利。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:SeldenMap1624.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/maokun-sumatra.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/maokun-sumatra.jpg" alt="郑和航海图苏门答剌幅" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>郑和航海图 · 苏门答剌幅</b>
+        <span class="era">收于茅元仪《武备志》，1621 年</span>
+        <p>上为暹罗、下为苏门答剌。这是「针路图」，不按地理比例，海岸线一字排开，逐段标注针位和更数——本质是航海操作手册，不是给人看疆域的。和上面那张雪尔登图对照着看，能看出官私两套航海知识的差别。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Mao_Kun_map_-_Sumatra_%26_Thailand.JPG" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure class="map-card">
+      <a class="pic" href="/img/history/maps/minard-1812.jpg" target="_blank" rel="noopener"><img src="/img/history/maps/minard-1812.jpg" alt="米纳尔绘 1812 年拿破仑俄国战役图" loading="lazy"></a>
+      <figcaption class="cap">
+        <b>1812 年俄国战役图</b>
+        <span class="era">夏尔·米纳尔，1869 年</span>
+        <p>一张图叠了六层信息：地理位置、时间、撤退途中的气温、进军与撤退的路线、以及兵力的消长。进攻那条带子的宽度按兵力缩放，撤回时细得几乎成线——这条线变细的过程就是这场战役本身。爱德华·塔夫特把它称作史上最好的统计图。</p>
+        <span class="src">来源：<a href="https://commons.wikimedia.org/wiki/File:Minards_chart_Napoleons_Russian_campaign_of_1812_made_in_1869.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> ｜ 授权：<em>Public domain</em></span>
+      </figcaption>
+    </figure>
+  </li>
+</ul>
+
+<h2>我手边的 · 只列清单</h2>
+
+<p>下面这些是我自己存的，<b>文件不在站上</b>，列出来是为了记录我读明史时实际在查哪些图。</p>
+
+<h3>《中国历史地图集》第七册 · 明时期</h3>
+
+<p>这是《中国历史地图集》的明时期分册。我手上的扫描件共 28 张，其中 23 张具名分幅，正好覆盖两直隶、十三布政使司，加上辽东、奴儿干都司、山西行都司、陕西行都司、哈密卫、亦力把里、蒙古、青藏这些边地——就是这个册子的分幅结构。另有 3 张第二幅和 2 张未命名。</p>
+
+<ul class="sheet-list">
+  <li>南直隶</li>
+  <li>直隶</li>
+  <li>山东</li>
+  <li>山西</li>
+  <li>河南</li>
+  <li>陕西</li>
+  <li>四川</li>
+  <li>湖广</li>
+  <li>江西</li>
+  <li>浙江</li>
+  <li>福建</li>
+  <li>广东</li>
+  <li>广西</li>
+  <li>云南</li>
+  <li>贵州</li>
+  <li>辽东</li>
+  <li>奴儿干都司</li>
+  <li>山西行都司</li>
+  <li>陕西行都司</li>
+  <li>哈密卫</li>
+  <li>亦力把里</li>
+  <li>蒙古</li>
+  <li>青藏</li>
+</ul>
+
+<h3>明代战争史地图</h3>
+
+<p>从知乎相关问题的回答里存下来的 22 张，多是战役示意图一类的二次加工图，不是原始史料。因为文件名是图床哈希，没法逐张标注，这里只记个数量。</p>
+
+<h2>工具</h2>
+
+<h3>《历史地图》· 谭其骧版</h3>
+
+<p>读明代疆域时我实际在用的工具。作者是网友 cadicex，安卓、Windows、macOS 三端都有，把图集的分幅拼成整幅离线查看，可以叠到卫星和地形底图上，还支持朝代切换后视图位置不变、离线检索《中国历史地名大辞典》。地形包要单独下，解压到 <code>assets/globe</code> 下，别再多套一层目录。</p>
+
+<p>项目主页在这里：<a href="https://github.com/cadicex/history_map" target="_blank" rel="noopener">github.com/cadicex/history_map</a>。作者自己在说明里写明了「资料来源于互联网，仅限学习使用」，也就是说<b>图集数据本身并未获得授权</b>，用不用、怎么用，得自己判断。他的仓库里只有说明和功能截图，没有任何地图数据。</p>
+
+<div class="note">
+  <b>我没有附任何下载链接。</b>这类资源的流通渠道多是网盘转存，来源不明；而且已经有人提醒过，第三方重新打包的版本有篡改地图边界线的情况——在国内这是审核红线，不是小事。要装就只从作者本人的渠道拿。
+</div>
+
+<h3>合法的替代方案</h3>
+
+<p>如果不想碰上面那个，这三个是正经的学术资源，而且都免费：</p>
+
+<ul class="book-list">
+  <li><a href="https://chgis.fas.harvard.edu/" target="_blank" rel="noopener">CHGIS 中国历史地理信息系统</a>（复旦大学历史地理研究中心与哈佛大学合作项目）—— 提供历代行政区划点位与边界的矢量数据，可以直接导进 QGIS 叠加，学术引用规范清楚</li>
+  <li><a href="https://ccts.sinica.edu.tw/" target="_blank" rel="noopener">中华文明之时空基础架构</a>（中研院）—— 在线地图，可叠加历史图层，查历史地名的坐标最方便</li>
+  <li><a href="https://osgeo.cn/map/" target="_blank" rel="noopener">OSGeo 中国 · 历史地图</a> —— 网页直接看各朝疆域，不用装东西</li>
+</ul>
+
+<h2>地图网站</h2>
+
+<p>下面这些是我用过、并且刚逐条验过能打开的。</p>
+
+<table>
+  <thead>
+    <tr><th>站点</th><th>适合找什么</th><th>授权</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://commons.wikimedia.org/wiki/Category:Old_maps_of_China" target="_blank" rel="noopener">Wikimedia Commons · 中国古地图</a></td>
+      <td>本页这批图就是从这儿取的，检索和授权标注都规范</td>
+      <td>逐张确认，多为公有领域</td>
+    </tr>
+    <tr>
+      <td><a href="https://shuge.org/" target="_blank" rel="noopener">书格</a></td>
+      <td>中文古籍与舆图的高清影像，彩绘本、长卷类做得极好</td>
+      <td>原典已过版权期，可下载</td>
+    </tr>
+    <tr>
+      <td><a href="https://digicol.dpm.org.cn/" target="_blank" rel="noopener">故宫博物院 · 数字文物库</a></td>
+      <td>院藏舆图与文物高清影像，看清实物尺寸和材质</td>
+      <td>按站点条款，非商业可用</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.nlc.cn/" target="_blank" rel="noopener">中国国家图书馆 · 中华古籍资源库</a></td>
+      <td>古地图原书影像，需注册，免费</td>
+      <td>非商业使用</td>
+    </tr>
+    <tr>
+      <td><a href="https://yugong.fudan.edu.cn/" target="_blank" rel="noopener">复旦大学中国历史地理研究所 · 禹贡网</a></td>
+      <td>历史地理学的专业机构站点，找研究与数据入口</td>
+      <td>按站点条款</td>
+    </tr>
+    <tr>
+      <td><a href="https://chgis.fas.harvard.edu/" target="_blank" rel="noopener">CHGIS 历史地理信息系统</a>（复旦 · 哈佛合作）</td>
+      <td>历代行政区划矢量数据，可下载、可叠加，学术引用规范清楚</td>
+      <td>学术免费</td>
+    </tr>
+    <tr>
+      <td><a href="https://ccts.sinica.edu.tw/" target="_blank" rel="noopener">中华文明之时空基础架构</a></td>
+      <td>在线历史地图，图层可切换，查地名坐标快</td>
+      <td>免费</td>
+    </tr>
+    <tr>
+      <td><a href="https://osgeo.cn/map/" target="_blank" rel="noopener">OSGeo 中国 · 历史地图</a></td>
+      <td>网页版各朝疆域图，无需安装</td>
+      <td>按站点条款</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.davidrumsey.com/" target="_blank" rel="noopener">David Rumsey 地图收藏</a></td>
+      <td>古地图精品极多，可按年代和地区筛选，高清扫描</td>
+      <td>CC BY-NC-SA，需署名</td>
+    </tr>
+    <tr>
+      <td><a href="https://gallica.bnf.fr/" target="_blank" rel="noopener">Gallica · 法国国家图书馆</a></td>
+      <td>法国大革命与拿破仑时代的军用地图、战报、手稿</td>
+      <td>公有领域</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.napoleon-series.org/" target="_blank" rel="noopener">The Napoleon Series</a></td>
+      <td>各国军团的战役地图与编制考订，做拿破仑战争细部时必查</td>
+      <td>免费查阅</td>
+    </tr>
+    <tr>
+      <td><a href="https://dl.ndl.go.jp/" target="_blank" rel="noopener">日本国立国会图书馆数字馆藏</a></td>
+      <td>日俄战争、幕末明治期的日文军事地图与写真帖</td>
+      <td>公有领域为主</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.webmap.cn/" target="_blank" rel="noopener">天地图 · 国家地理信息公共服务平台</a></td>
+      <td>官方底图，核准过的现行行政区划与标准地图</td>
+      <td>免费，需服务条款</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.gscloud.cn/" target="_blank" rel="noopener">地理空间数据云</a></td>
+      <td>DEM 高程与遥感影像，做地形底图用</td>
+      <td>注册免费</td>
+    </tr>
+    <tr>
+      <td><a href="https://dmfw.mca.gov.cn/" target="_blank" rel="noopener">民政部 · 中国国家地名信息库</a></td>
+      <td>地名沿革与位置的权威查询，比二手资料可靠</td>
+      <td>免费查阅</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note">
+  <b>怎么判断一张图能不能用。</b>中国的作品看作者去世是否已满 50 年，外国作品看出版是否早于 1930 年；再看平台标注的授权类型。<b>有两种情况要特别小心</b>：一是拿别人扫描的公有领域作品——扫描件本身一般不产生新版权，但有些机构会主张使用条款；二是现代编纂的地图集，比如各类《中国历史地图集》和出版社图册，图幅本身受版权保护，而且中国地图还涉及审图号。拿不准就先别放，存个链接，等确认了再补图。
+</div>
+
+</div>
+</div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/history/seal.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">wholvlsteam</div><div class="author-info-description">历史阅读笔记 —— 打卡清单、地图收藏、书单与旅行足迹</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wholvlsteam"><i class="fab fa-github"></i><span>我的 GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wholvlsteam" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:wholvl@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个人的历史坐标。<br>打卡清单 / 地图收藏 / 书单 / 旅行足迹。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/25/%E5%A4%A9%E4%B9%A6/" title="天书">天书</a><time datetime="2026-09-25T12:30:00.000Z" title="发表于 2026-09-25 20:30:00">2026-09-25</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%A7%91%E5%B9%BB/" style="font-size: 1.1em; color: #999">科幻</a> <a href="/tags/%E5%BF%97%E6%80%AA/" style="font-size: 1.1em; color: #999">志怪</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/09/">
+            <span class="card-archive-list-date">
+              九月 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">1</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-09-25T10:20:50.642Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wholvlsteam</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div></div></body></html>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 14" role="img" aria-label="装饰分隔纹样">
+  <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+    <line x1="0" y1="7" x2="48" y2="7"/>
+    <line x1="84" y1="7" x2="132" y2="7"/>
+    <path d="M54,7 L60,2 L66,7 L60,12 Z"/>
+    <circle cx="74" cy="7" r="1.8" fill="currentColor" stroke="none"/>
+    <circle cx="48" cy="7" r="2.4"/>
+    <circle cx="84" cy="7" r="2.4"/>
+  </g>
+</svg>
