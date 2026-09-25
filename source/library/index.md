@@ -542,7 +542,7 @@ top_img: false
 </div>
 
 <div class="note">
-<b>关于网址可用性。</b>上表是按<b>国内直连</b>实测的。有几个在学界很有名的站点（Internet Archive、HathiTrust、Google Books）在国内网络下打不开或常年超时，所以没有收进来——挂了也是白挂。如果你在境外或挂代理，它们当然值得一看。
+<b>关于网址可用性。</b>上表是按<b>国内直连</b>实测的。有几个在学界很有名的站点（Internet Archive、HathiTrust、Google Books）在国内网络下打不开或常年超时，所以没有收进来，如果你在境外或挂代理，它们当然值得一看。
 </div>
 
 </div>

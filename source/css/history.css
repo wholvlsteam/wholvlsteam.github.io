@@ -375,6 +375,9 @@ a.card:hover { transform: translateY(-2px); border-color: var(--accent); }
   overflow: hidden;
   background: var(--surface);
 }
+/* 标记点按 .map-inner 的百分比定位,而 .map-inner 的宽度就是图片的渲染宽度,
+   所以两层必须一起缩放,不能拆开。 */
+.map-inner { position: relative; }
 .map-wrap img { display: block; width: 100%; height: auto; border: none; border-radius: 0; }
 .marker {
   position: absolute;
@@ -392,6 +395,100 @@ a.card:hover { transform: translateY(-2px); border-color: var(--accent); }
   box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
 }
 html[data-theme="dark"] .marker { color: #1a1712; }
+
+/* --------------------------------------------------------------------------
+   .pin —— 精确坐标 + 引线 + 编号徽章
+   陕西那条线在 1:1000 万的图上挤成一团:西安到咸阳只有 8px,编号直接画
+   在坐标上会叠在一起。所以拆成三层:
+     .pin     零尺寸锚点,left/top 就是真实经纬度换算出的百分比位置
+     .pin > i 真实位置的小圆点
+     .pin > b 编号徽章,由 --tx / --ty 推开
+     ::after  从圆点指向徽章的引线,用 --len / --ang 摆角度
+   --tx/--ty/--len/--ang 都是逐个算好写在行内 style 里的。
+   -------------------------------------------------------------------------- */
+.pin {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+.pin > i {                       /* 真实位置 */
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1.5px solid var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+}
+.pin > b {                       /* 编号徽章 */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 17px;
+  height: 17px;
+  margin: -8.5px 0 0 -8.5px;
+  transform: translate(var(--tx), var(--ty));
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: .6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 17px;
+  text-align: center;
+  border: 1.5px solid var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .32);
+}
+html[data-theme="dark"] .pin > b { color: #1a1712; }
+.pin::after {                    /* 引线 */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--len);
+  height: 1px;
+  background: var(--accent);
+  opacity: .5;
+  transform-origin: 0 50%;
+  transform: rotate(var(--ang));
+}
+/* 悬停时整组一起放大,方便在密集处辨认 */
+.map-wrap:hover .pin > b { transition: transform .15s ease; }
+.pin:hover { z-index: 3; }
+.pin:hover > b { transform: translate(var(--tx), var(--ty)) scale(1.25); }
+.pin:hover::after { opacity: .9; }
+
+/* 还没去成、计划中的地方:空心徽章,和实心的「已到过」区分开。
+   暗色那条规则必须一起写 —— html[data-theme="dark"] .pin > b 的特异性是
+   (0,2,2),比 .pin.is-next > b 的 (0,2,1) 高,不显式覆盖的话底色和字色会
+   双双变成暗色,徽章整个糊成一团黑。 */
+.pin.is-next > b,
+html[data-theme="dark"] .pin.is-next > b {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.pin.is-next > i,
+html[data-theme="dark"] .pin.is-next > i {
+  background: var(--surface);
+  border-color: var(--accent);
+}
+.pin.is-next::after { opacity: .35; }
+
+/* 地图下方的图注 —— 审图号等合规信息 */
+.map-cap {
+  margin: 0 0 1.6rem;
+  font-size: .74rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.map-cap b { color: var(--ink-2); font-weight: 600; }
+.map-hint { display: none; }
+
 .foot-list { list-style: none; padding: 0; margin: 0 0 1.6rem; }
 .foot-list li {
   display: flex;
@@ -641,4 +738,13 @@ details.era-box > summary .era-tag {
   .era-books { font-size: .7rem; }
   .hist table { font-size: .78rem; }
   .hist table th, .hist table td { padding: .4rem .45rem; }
+
+  /* 地图在窄屏上横向可拖动:整幅缩到 390px 宽的话,西安和咸阳会重叠成
+     一个点。给内层一个最小宽度撑住比例,靠横向滚动看全。
+     注意 min-width 必须加在 .map-inner 上而不是 img 上 —— 标记点是按
+     .map-inner 的百分比定位的,撑 img 的话百分比会算错、点全部跑偏。 */
+  .map-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .map-inner { min-width: 660px; }
+  .map-hint { display: inline; }
+  .map-wrap .pin > b { width: 15px; height: 15px; margin: -7.5px 0 0 -7.5px; line-height: 15px; }
 }

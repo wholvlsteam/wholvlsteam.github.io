@@ -62,7 +62,10 @@ avatar:
   effect: false
 
 # Disable all banner images
-disable_top_img: false
+# 站内所有页面（含首页 source/index.md）都自带 .hist-hero 页头并写了 top_img: false，
+# 唯独 /posts/（文章列表，由 index_generator 生成、没有 front-matter）会套上主题
+# 的整屏横幅，结果是一整屏纯蓝加英文站名，列表要滚一屏才看得见。全站关掉横幅即可。
+disable_top_img: true
 
 # If the banner of page not setting, it will show the default_top_img
 default_top_img:
